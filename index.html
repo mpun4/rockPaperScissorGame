@@ -38,6 +38,47 @@
                     return getPlayerChoice();
                 }
             }
+
+            function playRound(playerChoice, compChoice)
+            {
+                if (playerChoice == compChoice)
+                    return `Tie. Both of you are ${compChoice}.`;
+                else if (compChoice == "rock")
+                    if (playerChoice == "paper")
+                    {
+                        playerScore++;
+                        return "You win. Paper beats rock.";
+                    }
+                    else
+                    {
+                        compScore++;
+                        return "Computer wins. Rock beats scissors.";
+                    }
+                else if (compChoice == "paper")
+                    if (playerChoice == "scissors")
+                    {
+                        playerScore++;
+                        return "You win. Scissors beats paper.";
+                    }
+                    else
+                    {
+                        compScore++;
+                        return "Computer wins. Paper beats rock.";
+                    }
+                else
+                {
+                    if (playerChoice == "rock") 
+                    {
+                        playerScore++;
+                        return "You win. Rock beats scissors.";
+                    }
+                    else
+                    {
+                        compScore++;
+                        return "Computer wins. Scissors beats paper.";
+                    }
+                }
+            }
         </script>
     </body>
 </html>
