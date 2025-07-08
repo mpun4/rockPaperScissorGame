@@ -6,6 +6,38 @@
     </head>
     <body>
         <script>
+            let playerScore = 0;
+            let compScore = 0;
+            let compChoice = getComputerChoice();
+            let playerChoice = getPlayerChoice();
+
+            function getComputerChoice()
+            {
+                let num = Math.round(Math.random() * 3 + 1);
+                num == 1 
+                if (num == 1)
+                    return "rock";
+                else if (num == 2)
+                    return "paper";
+                else
+                    return "scissors";
+            }
+
+            function getPlayerChoice()
+            {
+                let choice = prompt("Rock paper scissors?");
+                if (choice == "rock")
+                    return "rock";
+                else if (choice == "paper")
+                    return "paper";
+                else if (choice == "scissors")
+                    return "scissors";
+                else 
+                {
+                    console.log("Type Again");
+                    return getPlayerChoice();
+                }
+            }
         </script>
     </body>
 </html>
