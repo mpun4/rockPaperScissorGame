@@ -8,8 +8,6 @@
         <script>
             let playerScore = 0;
             let compScore = 0;
-            let compChoice = getComputerChoice();
-            let playerChoice = getPlayerChoice();
 
             function getComputerChoice()
             {
@@ -25,7 +23,8 @@
 
             function getPlayerChoice()
             {
-                let choice = prompt("Rock paper scissors?").toLowerCase();
+                let choice = prompt("Rock paper scissors?");
+                choice = choice.toLowerCase();
                 if (choice == "rock")
                     return "rock";
                 else if (choice == "paper")
@@ -79,6 +78,24 @@
                     }
                 }
             }
+
+            function playGame()
+            {
+                for (i = 0; i < 5; i++)
+                {
+                    let compChoice = getComputerChoice();
+                    let playerChoice = getPlayerChoice();
+                    console.log(`Your choice: ${playerChoice}, Computer choice: ${compChoice}`);
+                    console.log(playRound(playerChoice, compChoice));
+                    console.log(`Your score: ${playerScore}, Computer score: ${compScore}`);
+                }
+                if (playerScore > compScore)
+                    console.log("You win!");
+                else
+                    console.log("You lose, computer wins!");
+            }
+
+            playGame();
         </script>
     </body>
 </html>
