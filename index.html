@@ -5,10 +5,18 @@
         <title>Rock Paper Scissors</title>
     </head>
     <body>
+        <div class = "options">
+        <button>Rock</button>
+        <button>Paper</button>
+        <button>Scissors</button>
+        </div>
         <script>
             let playerScore = 0;
             let compScore = 0;
-
+            const choice = document.querySelector("options");
+            choice.addEventListener("click",(e) => {console.log(e.target.textContent);
+        }
+        );
             function getComputerChoice()
             {
                 let num = Math.round(Math.random() * 3 + 1);
@@ -95,7 +103,7 @@
                     console.log("You lose, computer wins!");
             }
 
-            playGame();
+            //playGame();
         </script>
     </body>
 </html>
