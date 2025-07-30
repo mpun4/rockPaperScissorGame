@@ -26,42 +26,65 @@
         <script>
             let playerScore = 0;
             let compScore = 0;
+            const svg = document.querySelectorAll("img");
             const buttons = document.querySelectorAll("button");
             const result = document.querySelector(".results");
             const resultText = document.createElement("p");
             const roundWinner = document.createElement("p");
             const scores = document.createElement("p");
             const winner = document.createElement("p");
+            let restart = document.createElement("button");
             result.appendChild(resultText);
             result.appendChild(roundWinner);
             result.appendChild(scores);
             result.appendChild(winner);
 
+            const images = Array.from(svg);
             const choice = Array.from(buttons);
 
-            const svg = document.querySelectorAll("img");
-            const images = Array.from(svg);
+            restart.textContent = "Restart";
+            restart.addEventListener("click", () => {
+                resultText.textContent = "";
+                roundWinner.textContent = "";
+                scores.textContent = "";
+                winner.textContent = "";
+                playerScore = 0;
+                compScore = 0;
+                result.removeChild(restart);
+            });
+
             images.forEach((img) => img.addEventListener("click", (e) => {
                 let imageTitle = e.target.src;
                 imageTitle = imageTitle.slice(imageTitle.lastIndexOf("/") + 1, imageTitle.length - 4);
                 let compChoice = getComputerChoice();
-                resultText.textContent = `Your choice: ${imageTitle}, Computer's choice: ${compChoice}`;
-                roundWinner.textContent = playRound(imageTitle, compChoice);
-                scores.textContent = `Your score: ${playerScore}, Computer's score: ${compScore}`;
+                if (playerScore != 5 && compScore != 5)
+                {
+                    resultText.textContent = `Your choice: ${imageTitle}, Computer's choice: ${compChoice}`;
+                    roundWinner.textContent = playRound(imageTitle, compChoice);
+                    scores.textContent = `Your score: ${playerScore}, Computer's score: ${compScore}`;
+                }
+                if (playerScore == 5 || compScore == 5)
+                {
+                    declareWinner();
+                    result.appendChild(restart);
+                }
             }));
             
             choice.forEach((x) => x.addEventListener("click", (e) => {
                 console.log(e.target.textContent);
                 let playerChoice = e.target.textContent.toLowerCase();
                 let compChoice = getComputerChoice();
-                resultText.textContent = `Your choice: ${playerChoice}, Computer's choice: ${compChoice}`;
-                roundWinner.textContent = playRound(playerChoice, compChoice);
-                scores.textContent = `Your score: ${playerScore}, Computer's score: ${compScore}`;
+                if (playerScore != 5 && compScore != 5)
+                {
+                    resultText.textContent = `Your choice: ${playerChoice}, Computer's choice: ${compChoice}`;
+                    roundWinner.textContent = playRound(playerChoice, compChoice);
+                    scores.textContent = `Your score: ${playerScore}, Computer's score: ${compScore}`;
+                }
                 if (playerScore == 5 || compScore == 5)
-                    if (playerScore > compScore)
-                        winner.textContent += "You win!";
-                    else
-                        winner.textContent += "You lose, computer wins!";
+                {
+                    declareWinner();
+                    result.appendChild(restart);
+                }
             }));
             
             function getComputerChoice()
@@ -150,6 +173,14 @@
                     console.log("You lose, computer wins!");
             }
 
+            
+            function declareWinner()
+            {
+                if (playerScore > compScore)
+                    winner.textContent = "You Win!";
+                else
+                    winner.textContent = "You lose, computer wins!"
+            }
             //playGame();
         </script>
     </body>
