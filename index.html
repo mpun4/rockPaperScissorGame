@@ -2,21 +2,57 @@
 <html lang = "en">
     <head>
         <meta charset = "UTF-8">
+        <link rel = "stylesheet" href = "./style.css">
         <title>Rock Paper Scissors</title>
     </head>
     <body>
+        <h1>Rock Paper Scissors</h1>
         <div class = "options">
+        <div class = "choice">
+        <img src = "./images/rock.svg" alt = "A pale pink geometric rock with purple highlights" height = "300">
         <button>Rock</button>
+        </div>
+        <div class = "choice">
+        <img src = "./images/paper.svg" alt = "A sky blue sheet of paper with coral geometric highlights" height = "300">
         <button>Paper</button>
+        </div>
+        <div class = "choice">
+        <img src = "./images/scissors.svg" alt = "A green pair of scissors with cut paper pieces above it" height = "300">
         <button>Scissors</button>
+        </div>
+        </div>
+        <div class = "results">
         </div>
         <script>
             let playerScore = 0;
             let compScore = 0;
-            const choice = document.querySelector("options");
-            choice.addEventListener("click",(e) => {console.log(e.target.textContent);
-        }
-        );
+            const buttons = document.querySelectorAll("button");
+            const result = document.querySelector(".results");
+            const resultText = document.createElement("p");
+            const roundWinner = document.createElement("p");
+            const scores = document.createElement("p");
+            const winner = document.createElement("p");
+            result.appendChild(resultText);
+            result.appendChild(roundWinner);
+            result.appendChild(scores);
+            result.appendChild(winner);
+
+            const choice = Array.from(buttons);
+            
+            choice.forEach((x) => x.addEventListener("click", (e) => {
+                console.log(e.target.textContent);
+                let playerChoice = e.target.textContent.toLowerCase();
+                let compChoice = getComputerChoice();
+                resultText.textContent = `Your choice: ${playerChoice}, Computer's choice: ${compChoice}`;
+                roundWinner.textContent = playRound(playerChoice, compChoice);
+                scores.textContent = `Your score: ${playerScore}, Computer's score: ${compScore}`;
+                if (playerScore == 5 || compScore == 5)
+                    if (playerScore > compScore)
+                        winner.textContent += "You win!";
+                    else
+                        winner.textContent += "You lose, computer wins!";
+            }));
+            
             function getComputerChoice()
             {
                 let num = Math.round(Math.random() * 3 + 1);
