@@ -38,6 +38,17 @@
             result.appendChild(winner);
 
             const choice = Array.from(buttons);
+
+            const svg = document.querySelectorAll("img");
+            const images = Array.from(svg);
+            images.forEach((img) => img.addEventListener("click", (e) => {
+                let imageTitle = e.target.src;
+                imageTitle = imageTitle.slice(imageTitle.lastIndexOf("/") + 1, imageTitle.length - 4);
+                let compChoice = getComputerChoice();
+                resultText.textContent = `Your choice: ${imageTitle}, Computer's choice: ${compChoice}`;
+                roundWinner.textContent = playRound(imageTitle, compChoice);
+                scores.textContent = `Your score: ${playerScore}, Computer's score: ${compScore}`;
+            }));
             
             choice.forEach((x) => x.addEventListener("click", (e) => {
                 console.log(e.target.textContent);
